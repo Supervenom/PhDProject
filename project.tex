@@ -1,0 +1,23 @@
+\documentclass[english]{scrartcl}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{microtype}
+\addtokomafont{disposition}{\rmfamily}
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+\title{Research project proposal}
+\subtitle{Computability and complexity of optimal reductions in functional programming languages}
+\author{Gabriele Vanoni}
+\date{}
+\maketitle
+\section{State of the art}
+There are different possible strategies when you have to evaluate expressions. Some are better than others, in the sense that bring you to the result in a lower number of steps. Since programs in pure functional languages are essentially expressions, the problem of defining good strategies is particularly interesting. Finding minimal strategies, i.e. strategies that minimize the number of steps, seems even more interesting. However this problem has been proven undecidable for the $\lambda$-calculus \cite[Section~13.5]{barendregt_lambda_1984}, \emph{the} paradigmatic pure functional language. But researchers have not abandoned the field and since ``optimality and computability cannot be both achieved at the same time, the trick consists in a change of granularity'' \cite{terese_term_2003}. Around 40 years ago Jean-Jacques Lévy introduced the notion of \emph{optimal reduction}, where optimal roughly means without duplication of reduction work \cite{levy_reductions_1978}. After more than 10 years Lamping proposed the first algorithm to actually implement optimal reductions in the Lévy sense  \cite{lamping_algorithm_1990}.
+\section{Project description}
+\section{Expected results}
+\bibliographystyle{alpha}
+\bibliography{project}
+\end{document}
