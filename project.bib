@@ -8,11 +8,11 @@
 	publisher = {North-Holland},
 	author = {Barendregt, Hendrik Pieter},
 	year = {1984},
-	keywords = {Lambda calculus, Mathematics / Calculus, Mathematics / Logic, Mathematics / Reference}
+	keywords = {Mathematics / Logic, Lambda calculus, Mathematics / Calculus, Mathematics / Reference}
 }
 
 @book{terese_term_2003,
-	address = {Cambridge, UK ; New York},
+	address = {Cambridge, UK; New York},
 	title = {Term {Rewriting} {Systems}},
 	isbn = {978-0-521-39115-3},
 	abstract = {Term rewriting systems, which developed out of mathematical logic, consist of sequences of discrete steps where one term is replaced with another. Their many applications range from automatic theorem proving systems to computer algebra. This book begins with several examples, followed by a chapter on basic notions that provides a foundation for the rest of the work. First-order and higher-order theories are presented, with much of the latter material appearing for the first time in book form. Subjects treated include orthogonality, termination, lambda calculus and term graph rewriting. There is also a chapter detailing the required mathematical background.},
@@ -21,14 +21,6 @@
 	author = {Terese},
 	month = apr,
 	year = {2003}
-}
-
-@phdthesis{levy_reductions_1978,
-	title = {Réductions correctes et optimales dans le lambda-calcul},
-	school = {Université Paris 7},
-	author = {Lévy, Jean-Jacques},
-	month = jan,
-	year = {1978}
 }
 
 @inproceedings{lamping_algorithm_1990,
@@ -45,4 +37,129 @@
 	author = {Lamping, John},
 	year = {1990},
 	pages = {16--30}
+}
+
+@phdthesis{levy_reductions_1978,
+	title = {Réductions correctes et optimales dans le lambda-calcul},
+	school = {Université Paris 7},
+	author = {Lévy, Jean-Jacques},
+	month = jan,
+	year = {1978}
+}
+
+@inproceedings{asperti_cost_2013,
+	title = {The {Cost} of {Usage} in the ?-{Calculus}},
+	shorttitle = {The {Cost} of {Usage} in the ?},
+	doi = {10.1109/LICS.2013.35},
+	abstract = {A new “inductive” approach to standardization for the λ-calculus has been recently introduced by Xi, allowing him to establish a double-exponential upper bound {\textbar}M{\textbar}2{\textbar}σ{\textbar} for the length of the standard reduction relative to an arbitrary reduction σ originated in M. In this paper we refine Xi's analysis, obtaining much better bounds, especially for computations producing small normal forms. For instance, for terms reducing to a boolean, we are able to prove that the length of the standard reduction is at most a mere factorial of the length of the shortest reduction sequence. The methodological innovation of our approach is that instead of counting the cost for producing something, as is customary, we count the cost of consuming things. The key observation is that the part of a λ-term that is needed to produce the normal form (or an arbitrary rigid prefix) may rapidly augment along a computation, but can only decrease very slowly (actually, linearly).},
+	booktitle = {2013 28th {Annual} {ACM}/{IEEE} {Symposium} on {Logic} in {Computer} {Science}},
+	author = {Asperti, A. and Lévy, J. J.},
+	month = jun,
+	year = {2013},
+	keywords = {beta reduction, Context, double-exponential upper bound, Electronic mail, lambda calculus, Manganese, prefixes, Production, shortest reduction sequence, stability, standard reduction, standardization, Standards, Upper bound, λ-calculus},
+	pages = {293--300},
+	file = {IEEE Xplore Abstract Record:/home/gabriele/.zotero/zotero/fuzoq98e.default/zotero/storage/MNY7AW6B/6571561.html:text/html}
+}
+
+@article{asperti_parallel_2001,
+	title = {Parallel {Beta} {Reduction} {Is} {Not} {Elementary} {Recursive}},
+	volume = {170},
+	issn = {0890-5401},
+	url = {http://www.sciencedirect.com/science/article/pii/S089054010192869X},
+	doi = {10.1006/inco.2001.2869},
+	abstract = {We analyze the inherent complexity of implementing Lévy's notion of optimal evaluation for the λ-calculus, where similar redexes are contracted in one step via so-called parallel β-reduction. Optimal evaluation was finally realized by Lamping, who introduced a beautiful graph reduction technology for sharing evaluation contexts dual to the sharing of values. His pioneering insights have been modified and improved in subsequent implementations of optimal reduction. We prove that the cost of parallel β-reduction is not bounded by any Kalmár-elementary recursive function. Not only do we establish that the parallel β-step cannot be a unit-cost operation, we demonstrate that the time complexity of implementing a sequence of n parallel β-steps is not bounded as O(2n), O(22n), O(222n), or in general, O(Kl(n)), where Kl(n) is a fixed stack of l 2's with an n on top. A key insight, essential to the establishment of this non-elementary lower bound, is that any simply typed λ-term can be reduced to normal form in a number of parallel β-steps that is only polynomial in the length of the explicitly typed term. The result follows from Statman's theorem that deciding equivalence of typed λ-terms is not elementary recursive. The main theorem gives a lower bound on the work that must be done by any technology that implements Lévy's notion of optimal reduction. However, in the significant case of Lamping's solution, we make some important remarks addressing how work done by β-reduction is translated into equivalent work carried out by his bookkeeping nodes. In particular, we identify the computational paradigms of superposition of values and of higher-order sharing, appealing to compelling analogies with quantum mechanics and SIMD-parallelism.},
+	number = {1},
+	urldate = {2018-04-28},
+	journal = {Information and Computation},
+	author = {Asperti, Andrea and Mairson, Harry G.},
+	month = oct,
+	year = {2001},
+	pages = {49--80},
+	file = {ScienceDirect Full Text PDF:/home/gabriele/.zotero/zotero/fuzoq98e.default/zotero/storage/G9TCZA8W/Asperti e Mairson - 2001 - Parallel Beta Reduction Is Not Elementary Recursiv.pdf:application/pdf;ScienceDirect Snapshot:/home/gabriele/.zotero/zotero/fuzoq98e.default/zotero/storage/ADXN3YAE/S089054010192869X.html:text/html}
+}
+
+@article{asperti_optimal_2004,
+	title = {({Optimal}) duplication is not elementary recursive},
+	volume = {193},
+	issn = {0890-5401},
+	url = {http://www.sciencedirect.com/science/article/pii/S0890540104000884},
+	doi = {10.1016/j.ic.2004.05.001},
+	abstract = {In 1998 Asperti and Mairson proved that the cost of reducing a lambda-term using an optimal lambda-reducer (a la Lévy) cannot be bound by any elementary function in the number of shared-beta steps. We prove in this paper that an analogous result holds for Lamping’s abstract algorithm. That is, there is no elementary function in the number of shared beta steps bounding the number of duplication steps of the optimal reducer. This theorem vindicates the oracle of Lamping’s algorithm as the culprit for the negative result of Asperti and Mairson. The result is obtained using as a technical tool Elementary Affine Logic.},
+	number = {1},
+	urldate = {2018-04-28},
+	journal = {Information and Computation},
+	author = {Asperti, Andrea and Coppola, Paolo and Martini, Simone},
+	month = aug,
+	year = {2004},
+	keywords = {Complexity, Elementary affine logic, Graph rewriting, Optimal reduction},
+	pages = {21--56},
+	file = {ScienceDirect Full Text PDF:/home/gabriele/.zotero/zotero/fuzoq98e.default/zotero/storage/8FTU5AN9/Asperti et al. - 2004 - (Optimal) duplication is not elementary recursive.pdf:application/pdf;ScienceDirect Snapshot:/home/gabriele/.zotero/zotero/fuzoq98e.default/zotero/storage/G9LSXQWV/S0890540104000884.html:text/html}
+}
+
+@phdthesis{kathail_optimal_1990,
+	title = {Optimal {Interpreters} for lambda-calculus based functional languages},
+	school = {Massachusetts Institute of Technology},
+	author = {Kathail, Vinod},
+	year = {1990}
+}
+
+@article{asperti_bologna_1996,
+	title = {The {Bologna} {Optimal} {Higher}-{Order} {Machine}},
+	volume = {6},
+	issn = {1469-7653, 0956-7968},
+	doi = {10.1017/S0956796800001994},
+	abstract = {The Bologna Optimal Higher-order Machine (BOHM) is a prototype implementation of the core of a functional language based on (a variant of) Lamping's optimal graph reduction technique (Lamping, 1990; Gonthier et al., 1992a; Asperti, 1994). The source language is a sugared λ-calculus enriched with booleans, integers, lists and basic operations on these data types (following the guidelines of Interaction Systems – Asperti and Laneve (1993b, 1994), Laneve (1993)). In this paper, we shall describe BOHM's general architecture (comprising the garbage collector), and give a large set of benchmarks and experimental results.},
+	language = {en},
+	number = {6},
+	urldate = {2018-04-29},
+	journal = {Journal of Functional Programming},
+	author = {Asperti, Andrea and Giovannetti, Cecilia and Naletto, Andrea},
+	month = nov,
+	year = {1996},
+	pages = {763--810},
+	file = {Snapshot:/home/gabriele/.zotero/zotero/fuzoq98e.default/zotero/storage/9HM9ZA5Q/1F2763B0F931680F9B15BDC750BEB343.html:text/html}
+}
+
+@article{asperti_interaction_1994,
+	title = {Interaction {Systems} {I}: {The} theory of optimal reductions{\textless}a href="\#fn01"{\textgreater}{\textless}span class="sup"{\textgreater}†{\textless}/span{\textgreater}{\textless}/a{\textgreater}},
+	volume = {4},
+	issn = {1469-8072, 0960-1295},
+	shorttitle = {Interaction {Systems} {I}},
+	doi = {10.1017/S0960129500000566},
+	abstract = {We introduce a new class of higher order rewriting systems, called Interaction Systems (IS's). IS's are derived from Lafont's (Intuitionistic) Interaction Nets (Lafont 1990) by dropping the linearity constraint. In particular, we borrow from Interaction Nets the syntactical bipartitions of operators into constructors and destructors and the principle of binary interaction. As a consequence, IS's are a subclass of Klop's Combinatory Reduction Systems (Klop 1980), where the Curry-Howard analogy still ‘makes sense’. Destructors and constructors, respectively, correspond to left and right logical introduction rules: interaction is cut and reduction is cut-elimination.Interaction Systems have been primarily motivated by the necessity of extending the practice of optimal evaluators for λ-calculus (Lamping 1990; Gonthier et al. 1992a) to other computational constructs such as conditionals and recursion. In this paper we focus on the theoretical aspects of optimal reductions. In particular, we generalize the family relation in Lévy (1978; 1980), thus defining the amount of sharing an optimal evaluator is required to perform. We reinforce our notion of family by approaching it in two different ways (generalizing labelling and extraction in Levy (1980)) and proving their coincidence. The reader is referred to Asperti and Laneve (1993c) for the paradigmatic description of optimal evaluators of IS's.},
+	language = {en},
+	number = {4},
+	urldate = {2018-04-29},
+	journal = {Mathematical Structures in Computer Science},
+	author = {Asperti, Andrea and Laneve, Cosimo},
+	month = dec,
+	year = {1994},
+	pages = {457--504},
+	file = {Snapshot:/home/gabriele/.zotero/zotero/fuzoq98e.default/zotero/storage/Z754A5UU/CADB22B6E534BEE8411CADF0E8593843.html:text/html}
+}
+
+@article{asperti_interaction_1996,
+	title = {Interaction systems {II}: {The} practice of optimal reductions},
+	volume = {159},
+	issn = {0304-3975},
+	shorttitle = {Interaction systems {II}},
+	doi = {10.1016/0304-3975(95)00062-3},
+	abstract = {Lamping's optimal graph reduction technique for the λ-calculus is generalized to a new class of higher-order rewriting systems, called Interaction Systems. Interaction Systems provide a nice integration of the functional paradigm with a rich class of data structures (all inductive types), and some basic control flow constructs such as conditionals and (primitive or general) recursion. We describe a uniform and optimal implementation, in Lamping's style, for all these features. The paper is the natural continuation of [3], where we focused on the theoretical aspects of optimal reductions in Interaction Systems (family relation, labeling, extraction).},
+	number = {2},
+	urldate = {2018-04-29},
+	journal = {Theoretical Computer Science},
+	author = {Asperti, Andrea and Laneve, Cosimo},
+	month = jun,
+	year = {1996},
+	pages = {191--244},
+	file = {ScienceDirect Full Text PDF:/home/gabriele/.zotero/zotero/fuzoq98e.default/zotero/storage/AWGCW5I4/Asperti e Laneve - 1996 - Interaction systems II The practice of optimal re.pdf:application/pdf;ScienceDirect Snapshot:/home/gabriele/.zotero/zotero/fuzoq98e.default/zotero/storage/4J7PIAXS/0304397595000623.html:text/html}
+}
+
+@book{asperti_optimal_1998,
+	address = {New York, NY, USA},
+	title = {The {Optimal} {Implementation} of {Functional} {Programming} {Languages}},
+	isbn = {978-0-521-62112-0},
+	publisher = {Cambridge University Press},
+	author = {Asperti, Andrea and Guerrini, Stefano},
+	year = {1998}
 }
