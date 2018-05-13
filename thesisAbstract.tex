@@ -9,6 +9,7 @@
 \usepackage{bm}
 \usepackage{tabularx}
 \usepackage{ifthen}
+\usepackage{amsmath,amssymb}
 \renewcommand{\labelitemi}{$\bullet$}
 
 %%% TERMS %%%
@@ -50,12 +51,29 @@
 \newcommand{\avglenght}[1]{\mathsf{adl_\mathcal{#1}}}
 
 \newboolean{monotonicity}
-\setboolean{monotonicity}{true}
+\setboolean{monotonicity}{false}
+
+\newenvironment{varitemize}
+{
+	\begin{list}{\labelitemi}
+		{\setlength{\itemsep}{0pt}
+			\setlength{\topsep}{0pt}
+			\setlength{\parsep}{0pt}
+			\setlength{\partopsep}{0pt}
+			\setlength{\leftmargin}{15pt}
+			\setlength{\rightmargin}{0pt}
+			\setlength{\itemindent}{0pt}
+			\setlength{\labelsep}{5pt}
+			\setlength{\labelwidth}{10pt}
+		}}
+		{
+		\end{list} 
+	}
 
 
 \begin{document}
 \title{Master Thesis Abstract}
-\subtitle{Probabilistic strategies in the $\lambda$-calculus\thanks{Work carried out at Dipartimento di Informatica - Scienza e Ingegneria, Università di Bologna under the supervision of Prof. Ugo Dal Lago.}}
+\subtitle{On Randomised Strategies in the $\lambda$-calculus\thanks{Work carried out at Dipartimento di Informatica - Scienza e Ingegneria, Università di Bologna under the supervision of Prof. Ugo Dal Lago.}}
 \author{Gabriele Vanoni}
 \institute{Politecnico di Milano\\
 	\email{gabriele.vanoni@mail.polimi.it}}
@@ -63,32 +81,57 @@
 There are different possible \emph{strategies} you can follow to evaluate expressions. Some are better than others, and bring you to the result in a lower number of steps. Since programs in pure functional languages are essentially expressions, the problem of defining good strategies is particularly interesting. Finding \emph{minimal} strategies, i.e. strategies that minimize the number of steps to normal form, seems even more interesting. However the problem of picking the redex leading to the reduction sequence of least length has been proven undecidable for the $\lambda$-calculus \cite[Section~13.5]{barendregt_lambda_1984}, \emph{the} paradigmatic pure functional language. In the last decades several reduction strategies have been developed. Their importance is crucial in the study of evaluation orders in functional programming languages, which is one of their main characteristics and defines an important part of their semantics. The reader can think about the differences between \texttt{Haskell} (\emph{call-by-need}) and \texttt{Caml} (\emph{call-by-value}). The $\lambda$-calculus is a good abstraction to study reduction mechanisms beacause of its very simple structure. In fact, although \emph{Turing-complete}, it can be seen as a rewriting system \cite{terese_term_2003}, where terms can be formed in only two ways, by abstraction and application, and only one rewriting rule, the $\beta$-rule, is present. Reduction strategies for the $\lambda$-calculus are typically defined according to the position of the contracted \emph{redex} e.g. \emph{leftmost-outermost}, \emph{leftmost-innermost}, \emph{rightmost-innermost}. We show by means of examples the importance of the strategy for performances and termination.
 \begin{example}\label{example:canc}
 	Let $\bm{\omega}=\lambda x.xx$ and $\bm{\Omega}=\bm{\omega\omega}$. We now consider the reduction of the term $(\lambda x.y)\bm{\Omega}$ according to two different reduction strategies, namely leftmost-outermost ($\pslo$) and rightmost-innermost ($\psri$).
-	$$
-	(\lambda x.y)\bm{\Omega}\redlo y
-	$$
-	$$
-	(\lambda x.y)\bm{\Omega}\redri(\lambda x.y)\bm{\Omega}\redri(\lambda x.y)\bm{\Omega}\redri\cdots
-	$$
+	\begin{align*}
+		(\lambda x.y)\bm{\Omega}&\redlo y\\
+		(\lambda x.y)\bm{\Omega}&\redri(\lambda x.y)\bm{\Omega}\redri(\lambda x.y)\bm{\Omega}\redri\cdots
+	\end{align*}
 	$\bm{\Omega}$ is a looping combinator i.e. a $\lambda$-term which is evaluated to itself. However in $(\lambda x.y)\bm{\Omega}$ the argument $\bm{\Omega}$ is discarded since the function returns the constant $y$. Thus leftmost-outermost (akin to call-by-name in functional programming languages) yields a normal form in one step. Conversely rightmost-innermost (akin to call-by-value) continues to evaluate the argument $(\lambda x.y)\bm{\Omega}$, though it is useless, and rewrites always the same term, yielding to a non-terminating process.
 \end{example}
 \begin{example}\label{example:copy}
 	Let $\bm{I}=\lambda x.x$. We now consider the reduction of the term $(\lambda x.xx)(\bm{II})$, according to $\pslo$ and $\psri$ strategies, as above.
-	$$
-	(\lambda x.xx)(\bm{II}) \redlo (\bm{II})(\bm{II}) \redlo \bm{I}(\bm{II}) \redlo \bm{II} \redlo \bm{I}
-	$$
-	$$
-	(\lambda x.xx)(\bm{II}) \redri (\lambda x.xx)\bm{I} \redri \bm{II} \redri \bm{I}
-	$$
+	\begin{align*}
+		(\lambda x.xx)(\bm{II})&\redlo (\bm{II})(\bm{II}) \redlo
+		\bm{I}(\bm{II}) \redlo \bm{II} \redlo \bm{I}\\
+		(\lambda x.xx)(\bm{II})&\redri (\lambda x.xx)\bm{I} \redri \bm{II} \redri \bm{I}
+	\end{align*}
 	Here the argument $\bm{II}$ is duplicated and thus it is convenient to reduce it before it is copied, as in righmost-innermost. Leftmost-outermost does, indeed, some useless work.
 \end{example}
 In general, innermost strategies are considered more efficent, beacause programs often need to copy their arguments more than once (as in Example \ref{example:copy}). However, as seen in Example \ref{example:canc}, rightmost-innermost is not normalizing. There exist terms which have a normal form but this is not reached using an innermost strategy. Instead, a classical result by Curry and Feys \cite{curry_combinatory_1958}, states that reducing a term leftmost-outermost always brings to normal norm, if it exists. Thus, leftmost-outermost is slower, but in a sense, safer. Can we get, in some way, the benefits from both the worlds? 
 All reduction strategies for the $\lambda$-calculus present in the literature up to now are \emph{deterministic}, i.e. are (partial) functions from terms to terms. However there is some work on probabilistic rewrite systems \cite{bournez_proving_2005,ferrer_fioriti_probabilistic_2015,avanzini_probabilistic_2018}, in particular regarding termination. But what would happen if the redex to reduce were picked according to some probability distribution? How many steps would a term need to reach a normal form in \emph{average}? In this work in particular we consider a \emph{probabilistic} reduction strategy $\mathsf{P}_\varepsilon$, where the $\pslo$-redex is reduced with probability $\varepsilon$ and the $\psri$-redex with probability $1-\varepsilon$. The following are our main results.
-\begin{itemize}
-	\item $\mathsf{P}_\varepsilon$ is a positive almost-surely normalizing strategy. That means that if a term $\termone$ is weakly normalizing, then the expected number of reduction steps from $\termone$ to its normal form with strategy $\mathsf{P}_\varepsilon$ is finite. This is in contrast to rightmost-innermost, as seen in Example \ref{example:canc}.
-	\item $\mathsf{P}_\varepsilon$ is a non-trivial strategy. In fact there exists a class of terms for which $\mathsf{P}_\varepsilon$ outperforms, in average, both $\pslo$ and $\psri$. This is not unexpected, since in computer science there are a lot of examples where adding a random factor improves performances, e.g. in randomized algorithms, which are often faster (in average) than their deterministic counterpart \cite{motwani_randomized_1995}. 
-	\ifthenelse {\boolean{monotonicity}}{\item The function described by the expected number of reduction steps with strategy $\mathsf{P}_\varepsilon$ depending on $\varepsilon$ is monotonically increasing [decreasing] for the sub-calculus $\lambda I$ [$\lambda A$].}{
-		\item The function described by the expected number of reduction steps to normal form with strategy $\mathsf{P}_\varepsilon$ depending on $\varepsilon$ has minimum for $\varepsilon=0$ [$=1$] for the sub-calculus $\lambda I$ [$\lambda A$].} Moreover in $\lambda I$ [$\lambda A]$, $\mathsf{P}_0$ (i.e. rightmost-innermost) [$\mathsf{P}_1$ (i.e. leftmost-outermost)] minimizes the number of steps to normal form among \emph{all} the possible strategies.
-\end{itemize}
+\begin{varitemize}
+	\item
+	For every, $0<\varepsilon\leq 1$, te strategly
+	$\mathsf{P}_\varepsilon$ is a positive almost-surely normalizing on
+	weakly normalizing terms  That means that if a term $\termone$ is
+	weakly normalizing, then the expected number of reduction steps from
+	$\termone$ to its normal form with strategy $\mathsf{P}_\varepsilon$
+	is finite. This is in contrast to rightmost-innermost, as seen in
+	Example \ref{example:canc}.
+	\item
+	$\{\mathsf{P}_\varepsilon\}_{0<\varepsilon<1}$ is a non-trivial
+	family of strategies. In fact there exists a class of terms and an
+	$\varepsilon$ for which $\mathsf{P}_\varepsilon$ outperforms, in
+	average, both $\pslo$ and $\psri$. This is not unexpected, since in
+	computer science there are a lot of examples where adding a random
+	factor improves performances, e.g. in randomized algorithms, which
+	are often faster (in average) than their deterministic counterpart
+	\cite{motwani_randomized_1995}.  \ifthenelse
+	{\boolean{monotonicity}}{\item The function described by the
+		expected number of reduction steps with strategy
+		$\mathsf{P}_\varepsilon$ depending on $\varepsilon$ is
+		monotonically increasing [decreasing] for the sub-calculus
+		$\lambda I$ [$\lambda A$].}
+	\item
+	The expected number of reduction steps to
+	normal form with strategy $\mathsf{P}_\varepsilon$, seen as a function
+	on $\varepsilon$, has minimum in $0$ (respectively, at $1$) for terms
+	in the sub-calculus $\lambda I$ (respectively, in $\lambda A$).
+	%  Moreover in $\lambda I$
+	%              [$\lambda A]$, $\mathsf{P}_0$ (i.e. rightmost-innermost)
+	%              [$\mathsf{P}_1$ (i.e. leftmost-outermost)] minimizes the
+	%              number of steps to normal form among \emph{all} the
+	%              possible strategies.
+\end{varitemize}
 \bibliographystyle{alpha}
 \bibliography{thesisAbstract}
 \end{document}
